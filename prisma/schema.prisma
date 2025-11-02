@@ -19,4 +19,16 @@ model Category {
   name      String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  Food      Food[]
+}
+
+model Food {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  price       Float
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
 }

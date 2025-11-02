@@ -3,6 +3,7 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { AppResolver } from './app.resolver';
 import { CategoryModule } from './category/category.module';
+import { FoodModule } from './food/food.module';
 
 @Module({
   imports: [
@@ -11,6 +12,7 @@ import { CategoryModule } from './category/category.module';
       autoSchemaFile: true,
     }),
     CategoryModule,
+    FoodModule,
   ],
   providers: [AppResolver],
 })
