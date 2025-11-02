@@ -181,9 +181,7 @@ Resposta esperada:
 - Criar módulos e resolvers que injetem o `PrismaService` para operações CRUD.
 - Definir tipos GraphQL com `@ObjectType()` e `@Field()` para exposição no schema.
 
----
 
-Se quiser, eu posso:
-- corrigir links/paths no README para se alinhar com a estrutura do projeto atual;
-- adicionar exemplos de migração com dados de seed;
-- ou formatar o arquivo para incluir badges e instruções de contribuição.
+- https://docs.nestjs.com/recipes/crud-generator#generating-a-new-resource
+
+---
