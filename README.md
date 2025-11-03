@@ -142,7 +142,16 @@ npm run start:dev
 
 Acesse o GraphQL Playground em: http://localhost:3000/graphql
 
-### 4.3 Comandos úteis do Prisma
+### 4.3 Configurações Prisma Client
+```typescript
+  generator client {
+  provider     = "prisma-client"
+  output       = "../generated/prisma"
+  moduleFormat = "cjs"
+}
+```
+
+### 4.4 Comandos úteis do Prisma
 
 ```bash
 # gerar/atualizar cliente
@@ -155,7 +164,7 @@ npx prisma migrate dev --schema=prisma/schema.prisma --name init
 npx prisma db pull --schema=prisma/schema.prisma
 ```
 
-### 4.4 Teste rápido (GraphQL)
+### 4.5 Teste rápido (GraphQL)
 
 ```graphql
 query {
