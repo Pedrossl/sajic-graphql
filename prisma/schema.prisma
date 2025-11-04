@@ -12,7 +12,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = "postgresql://sajic:123456@localhost:5432/sajic_db?schema=public"
+  url      = env("DATABASE_URL")
 }
 
 model Category {

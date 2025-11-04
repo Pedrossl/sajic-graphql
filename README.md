@@ -64,9 +64,10 @@ export class PrismaService extends PrismaClient implements OnModuleInit {
 
 ## 3. Configuração da API GraphQL (Code-First)
 
-### 3.1 Instalar dependências do GraphQL
+### 3.1 Instalar dependências do GraphQL e Configurações do nest
 
 npm i @nestjs/graphql @nestjs/apollo @apollo/server @as-integrations/express5 graphql
+npm i @nestjs/config
 ```
 
 ### 3.2 Configurar `GraphQLModule` no `AppModule`
@@ -82,7 +83,9 @@ import { PrismaModule } from './database/prisma.module';
 
 @Module({
   imports: [
-    PrismaModule,
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: true,
