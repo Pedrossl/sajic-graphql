@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../../database/prisma.service';
 import { CreateReviewInput } from './dto/create-review.input';
 import { ReviewDto } from './dto/review.dto';
@@ -25,6 +25,16 @@ export class ReviewService {
   }
 
   async create(data: CreateReviewInput): Promise<ReviewDto> {
+    const { foodId } = data;
+
+    const foodExists = await this.prisma.food.findUnique({
+      where: { id: foodId },
+    });
+
+    if (!foodExists) {
+      throw new NotFoundException(`Food com ID ${foodId} não encontrado.`);
+    }
+
     const review = await this.prisma.review.create({
       data,
       include: { food: true },
@@ -33,6 +43,25 @@ export class ReviewService {
   }
 
   async update(id: number, data: UpdateReviewInput): Promise<ReviewDto> {
+    const reviewExists = await this.prisma.review.findUnique({
+      where: { id },
+    });
+
+    if (!reviewExists) {
+      throw new NotFoundException(`Review com ID ${id} não encontrada.`);
+    }
+
+    if (data.foodId) {
+      const foodExists = await this.prisma.food.findUnique({
+        where: { id: data.foodId },
+      });
+      if (!foodExists) {
+        throw new NotFoundException(
+          `Food com ID ${data.foodId} não encontrado.`,
+        );
+      }
+    }
+
     const review = await this.prisma.review.update({
       where: { id },
       data,
@@ -42,6 +71,14 @@ export class ReviewService {
   }
 
   async remove(id: number): Promise<ReviewDto> {
+    const reviewExists = await this.prisma.review.findUnique({
+      where: { id },
+    });
+
+    if (!reviewExists) {
+      throw new NotFoundException(`Review com ID ${id} não encontrada.`);
+    }
+
     const review = await this.prisma.review.delete({
       where: { id },
       include: { food: true },
