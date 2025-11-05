@@ -5,6 +5,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { AppResolver } from './app.resolver';
 import { CategoryModule } from './category/category.module';
 import { FoodModule } from './food/food.module';
+import { ReviewModule } from './review/review.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { FoodModule } from './food/food.module';
     }),
     CategoryModule,
     FoodModule,
+    ReviewModule,
   ],
   providers: [AppResolver],
 })

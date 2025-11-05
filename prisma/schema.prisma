@@ -32,4 +32,15 @@ model Food {
   category    Category @relation(fields: [categoryId], references: [id])
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+  reviews     Review[]
+}
+
+model Review {
+  id        Int      @id @default(autoincrement())
+  rating    Int
+  comment   String?
+  foodId    Int
+  food      Food     @relation(fields: [foodId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
